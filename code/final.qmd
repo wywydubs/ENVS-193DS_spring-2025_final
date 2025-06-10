@@ -107,10 +107,23 @@ ggplot(
 
   # Problem 3 
   
-  a. In this data set, 1s indicate that a nest box was occupied by that specific 
+  a. Response Variable
+  
+  In this data set, 1s indicate that a nest box was occupied by that specific 
   bird species, and 0s indicate that the nest box was unoccupied. Biologically, 
-  this represents whether a certain nest box provided viable nesting habitat for 
+  this represents if a certain nest box provided viable nesting habitat for 
   a specific species during the breeding season.
+  
+  
+  b. Purpose of Study
+  
+  The Swift Parrots are the main bird intended to be protected, while the 
+  Starlings and Martins are the competitors. Since the Swift Parrots are in a
+  more vulnerable population outlook, they require more protection, while the 
+  other two species are not endangered currently. 
+  
+  
+  
 
 
 

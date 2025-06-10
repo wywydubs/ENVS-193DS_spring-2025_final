@@ -4,8 +4,8 @@ Final for ES193DS which involves research writing, data visualization, data
 analysis, and affective and exploratory visualization work.
 
 ## Data and File overview: 
-dara: This folder contains the raw data used.
-code: This folder contains the Quarto.
+data: This folder contains the raw data used for problem 2 and 3.
+code: This folder contains the Quarto doc.
 README: This file.
 
 ## Rendered output
