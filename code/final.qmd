@@ -48,4 +48,28 @@ where runoff is coming from (urban land, atmospheric deposition, fertilizer,
 wastewater treatment, and grasslands). (ANOVA: F = F-statistic, p = 0.02, η² = 
 effect size, α = significance level).
 
+
+# Problem 2
+
+## a. data cleaning and summarizing 
+
+```{r}
+sst_clean <- sst |> # rename
+  mutate(
+    year  = year(date),
+    month = month(date)) |>  # create new columns
+      
+    filter(year >= 2018)|>  # filter to match structure
+  group_by(year, month) |> # group by new columns 
+  summarize(
+    mean_monthly_sst = mean(temp), # add in mean 
+    .groups = 'drop') |> # make output ungrouped 
+  # (ChatGPT troubleshooting suggestion)
+  
+  mutate(
+    year = factor(year), # convert column to ordered month list (abbreviated)
+     month = factor(month, levels = 1:12, labels = month.abb, ordered = TRUE) 
+  ) 
+```
+
   
