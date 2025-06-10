@@ -11,7 +11,8 @@ library(gt) # chose gt
 library(janitor) # Optional packages
 library(readxl)
 library(readr)
-sst <- read_csv(here("data", "SST_update2023.csv"))
+sst <- read_csv(here("data", "SST_update2023.csv")) # read in data for prob 2 
+nest_boxes <- read_csv(here("data", "occdist.csv")) # read in data for prob 3 
 ```
 
 
@@ -104,4 +105,12 @@ ggplot(
 
 
 
+  # Problem 3 
   
+  a. In this data set, 1s indicate that a nest box was occupied by that specific 
+  bird species, and 0s indicate that the nest box was unoccupied. Biologically, 
+  this represents whether a certain nest box provided viable nesting habitat for 
+  a specific species during the breeding season.
+
+
+
