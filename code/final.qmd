@@ -14,3 +14,38 @@ library(readr)
 sst <- read_csv(here("data", "SST_update2023.csv"))
 ```
 
+
+
+# Problem 1
+
+## a. Transparent statistical methods
+
+In part 1 they used some type of correlation test. In part two they used an 
+ANOVA test. 
+
+## b. More information needed
+
+Effect size could be helpful in this context, as it would tell us more about
+the strength of the data, which would give more real world application (ex.
+a large effect size would explain a substantial nitrogen load difference. 
+Actually presenting the means and their standard deviations in some way would 
+also help, as this would give a digestible way to actually view the data, not 
+just the conclusion from the data (ex. mean fertilizer samples had x amount of 
+nitrogen present). 
+
+
+## c. Suggestions for Rewriting
+
+1. We found significant correlation between distance from headwater (km) 
+and annual total nitrogen load (kg year^-1), telling us that there is a
+relationship between the two likely due to impacts from the runoff surrounding 
+the headwaters. correlation test (pearson?) (r = correlation 
+coefficient, p = 0.03, α = significance level)
+
+2. The source of the runoff has a statistically significant effect on the
+average annual nitrogen load, telling us that nitrogen loads vary based on
+where runoff is coming from (urban land, atmospheric deposition, fertilizer, 
+wastewater treatment, and grasslands). (ANOVA: F = F-statistic, p = 0.02, η² = 
+effect size, α = significance level).
+
+  
