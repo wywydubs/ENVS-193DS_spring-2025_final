@@ -71,10 +71,37 @@ sst_clean <- sst |> # rename
      month = factor(month, levels = 1:12, labels = month.abb, ordered = TRUE) 
   )
   
- slice_sample(sst_clean, n = 5)
+ slice_sample(sst_clean, n = 5) # give the 5 samples
 
-str(sst_clean)
+str(sst_clean) # shwo the structure
 
 ```
+
+
+
+
+# b. Data visualization
+
+```{r recreation, message=FALSE, warning=FALSE}
+ggplot(
+  data = sst_clean, # specify in data
+  aes(x = month, y = mean_monthly_sst, group = year, color = year)) + 
+  # define x, y, groups, color
+  geom_line(linewidth = 0.7) + # add in line and points
+  geom_point(size = 2) + 
+  labs(
+    x = "Month",
+    y = "Mean monthly sea surface temperature (°C)",
+    color = "Year") + # add in names for x and y and color
+  scale_color_brewer(palette = "Blues") + # add in blues colors
+  theme_bw() + # assign correct theme
+  theme(
+    panel.grid.major = element_blank(), # get rid of grid lines
+    panel.grid.minor = element_blank(),
+    legend.position = c(0.18, 0.75) # rough legend position
+  )
+```
+
+
 
   
