@@ -122,6 +122,43 @@ ggplot(
   more vulnerable population outlook, they require more protection, while the 
   other two species are not endangered currently. 
   
+  c. Difference in “seasons”
+  
+  The two seasons are the breeding years 2016 and 2019. In this study, 
+  2016 was for new nest boxes, and 2019 was for established boxes 
+  that had been there for 3 years which gave researchers the ability to compare
+  initial inhabitant data to established box inhabitant data. 
+  
+  d. Table 
+  
+```{r table of models}
+
+model_table <- tibble::tibble( # make data frame
+  `Model #` = 1:4, # assign numbers
+  `Season Variable Present?` = c("No", "Yes", "No", "Yes"), # add season column
+  `Distance to Forest Edge Present?` = c("No", "No", "Yes", "Yes"), 
+  # add forest column
+  
+  `Model Description` = c(
+    "Null model: assumes no effect from the variables.",
+    "Season-only model: tests if year/season affects occupancy.",
+    "Distance-only model: tests if distance to forest affects occupancy.",
+    "Saturated model: includes interaction between season and distance 
+    variables."
+  ) # add in descriptions
+)
+
+model_table |> #create a table
+  gt() |> 
+  tab_header(
+    title = "Table of Models for Nest Box Occupancy" # add title in header
+  )
+
+
+
+```
+  
+  
   
   
 
