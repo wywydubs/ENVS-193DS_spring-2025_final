@@ -1,0 +1,16 @@
+---
+title: "final"
+format: html
+---
+repo: https://github.com/wywydubs/ENVS-193DS_spring-2025_final
+```{r set up, message=FALSE, warning=FALSE}
+library(tidyverse) # Load packages (based on hw 3 packages)
+library(here)
+library(gt) # chose gt
+
+library(janitor) # Optional packages
+library(readxl)
+library(readr)
+read_csv(here("data", "SST_update2023.csv"))
+```
+
