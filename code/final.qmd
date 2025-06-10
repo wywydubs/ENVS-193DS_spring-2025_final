@@ -53,7 +53,7 @@ effect size, α = significance level).
 
 ## a. data cleaning and summarizing 
 
-```{r}
+```{r cleaning, message=FALSE, warning=FALSE}
 sst_clean <- sst |> # rename
   mutate(
     year  = year(date),
@@ -69,7 +69,12 @@ sst_clean <- sst |> # rename
   mutate(
     year = factor(year), # convert column to ordered month list (abbreviated)
      month = factor(month, levels = 1:12, labels = month.abb, ordered = TRUE) 
-  ) 
+  )
+  
+ slice_sample(sst_clean, n = 5)
+
+str(sst_clean)
+
 ```
 
   
