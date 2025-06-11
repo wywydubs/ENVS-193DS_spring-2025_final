@@ -11,6 +11,8 @@ library(gt) # chose gt
 library(janitor) # Optional packages
 library(readxl)
 library(readr)
+library(DHARMa)
+library(MuMIn)
 sst <- read_csv(here("data", "SST_update2023.csv")) # read in data for prob 2 
 nest_boxes <- read_csv(here("data", "occdist.csv")) |>
   clean_names() # read in data for prob 3 
@@ -176,7 +178,37 @@ mod4 <- glm(e ~ season * edge_distance, data = nest_boxes, family = binomial)
 # create saturated model
 ```
 
-  
+## f. Check the diagnostics 
+```{r simulate, message=FALSE, warning=FALSE}
+
+# simulate and plot for all models 
+
+res1 <- simulateResiduals(mod1)
+plot(res1)
+
+res2 <- simulateResiduals(mod2)
+plot(res2)
+
+res3 <- simulateResiduals(mod3)
+plot(res3)
+
+res4 <- simulateResiduals(mod4)
+plot(res4)
+
+```
 
 
+## g. Select the best model
+```{r MuMin}
+options(na.action = "na.fail") # troubleshooting line from MuMin guide
 
+# Use dredge to give every possible model from our model 4 with all variables
+dredge_results <- dredge(mod4)
+
+# Show the top models ranked by AICc (supposedly more accurate vs AIC)
+print(dredge_results)
+```
+
+The best model as determined by Akaike’s Information Criterion corrected for 
+small sample size (AICc) was the model that measured the occupancy based on
+the relationship between edge distance and season. 
