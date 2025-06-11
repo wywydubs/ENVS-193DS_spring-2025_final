@@ -12,7 +12,8 @@ library(janitor) # Optional packages
 library(readxl)
 library(readr)
 sst <- read_csv(here("data", "SST_update2023.csv")) # read in data for prob 2 
-nest_boxes <- read_csv(here("data", "occdist.csv")) # read in data for prob 3 
+nest_boxes <- read_csv(here("data", "occdist.csv")) |>
+  clean_names() # read in data for prob 3 
 ```
 
 
@@ -107,7 +108,7 @@ ggplot(
 
   # Problem 3 
   
-  a. Response Variable
+ ## a. Response Variable
   
   In this data set, 1s indicate that a nest box was occupied by that specific 
   bird species, and 0s indicate that the nest box was unoccupied. Biologically, 
@@ -115,21 +116,21 @@ ggplot(
   a specific species during the breeding season.
   
   
-  b. Purpose of Study
+ ## b. Purpose of Study
   
   The Swift Parrots are the main bird intended to be protected, while the 
   Starlings and Martins are the competitors. Since the Swift Parrots are in a
   more vulnerable population outlook, they require more protection, while the 
   other two species are not endangered currently. 
   
-  c. Difference in “seasons”
+ ## c. Difference in “seasons”
   
   The two seasons are the breeding years 2016 and 2019. In this study, 
   2016 was for new nest boxes, and 2019 was for established boxes 
   that had been there for 3 years which gave researchers the ability to compare
   initial inhabitant data to established box inhabitant data. 
   
-  d. Table 
+ ## d. Table 
   
 ```{r table of models}
 
@@ -159,7 +160,22 @@ model_table |> #create a table
 ```
   
   
-  
+## e. Run Models
+
+```{r models, message=FALSE, warning=FALSE}
+
+mod1 <- glm(e ~ 1, data = nest_boxes, family = binomial) # create null model
+
+mod2 <- glm(e ~ season, data = nest_boxes, family = binomial) 
+# create season model
+
+mod3 <- glm(e ~ edge_distance, data = nest_boxes, family = binomial) 
+# create edge distance model 
+
+mod4 <- glm(e ~ season * edge_distance, data = nest_boxes, family = binomial)
+# create saturated model
+```
+
   
 
 

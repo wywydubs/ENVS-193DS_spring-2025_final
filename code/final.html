@@ -106,7 +106,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(readxl)</span>
 <span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(readr)</span>
 <span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a>sst <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="fu">here</span>(<span class="st">"data"</span>, <span class="st">"SST_update2023.csv"</span>)) <span class="co"># read in data for prob 2 </span></span>
-<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a>nest_boxes <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="fu">here</span>(<span class="st">"data"</span>, <span class="st">"occdist.csv"</span>)) <span class="co"># read in data for prob 3 </span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a>nest_boxes <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="fu">here</span>(<span class="st">"data"</span>, <span class="st">"occdist.csv"</span>)) <span class="sc">|&gt;</span></span>
+<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">clean_names</span>() <span class="co"># read in data for prob 3 </span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <section id="problem-1" class="level1">
 <h1>Problem 1</h1>
@@ -153,11 +154,11 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <pre><code># A tibble: 5 × 3
   year  month mean_monthly_sst
   &lt;fct&gt; &lt;ord&gt;            &lt;dbl&gt;
-1 2018  Apr               12.8
-2 2019  Mar               13.6
-3 2022  Aug               17.5
-4 2021  Jun               15.9
-5 2022  Oct               17.9</code></pre>
+1 2019  Oct               17.1
+2 2018  Mar               13.5
+3 2023  Sep               18.4
+4 2019  Jan               14.7
+5 2022  Jun               16.2</code></pre>
 </div>
 <div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="fu">str</span>(sst_clean) <span class="co"># shwo the structure</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
@@ -198,21 +199,13 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 </div>
 <p># Problem 3</p>
-<ol type="a">
-<li>Response Variable</li>
-</ol>
+<p>## a. Response Variable</p>
 <p>In this data set, 1s indicate that a nest box was occupied by that specific bird species, and 0s indicate that the nest box was unoccupied. Biologically, this represents if a certain nest box provided viable nesting habitat for a specific species during the breeding season.</p>
-<ol start="2" type="a">
-<li>Purpose of Study</li>
-</ol>
+<p>## b. Purpose of Study</p>
 <p>The Swift Parrots are the main bird intended to be protected, while the Starlings and Martins are the competitors. Since the Swift Parrots are in a more vulnerable population outlook, they require more protection, while the other two species are not endangered currently.</p>
-<ol start="3" type="a">
-<li>Difference in “seasons”</li>
-</ol>
+<p>## c.&nbsp;Difference in “seasons”</p>
 <p>The two seasons are the breeding years 2016 and 2019. In this study, 2016 was for new nest boxes, and 2019 was for established boxes that had been there for 3 years which gave researchers the ability to compare initial inhabitant data to established box inhabitant data.</p>
-<ol start="4" type="a">
-<li>Table</li>
-</ol>
+<p>## d.&nbsp;Table</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>model_table <span class="ot">&lt;-</span> tibble<span class="sc">::</span><span class="fu">tibble</span>( <span class="co"># make data frame</span></span>
 <span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>  <span class="st">`</span><span class="at">Model #</span><span class="st">`</span> <span class="ot">=</span> <span class="dv">1</span><span class="sc">:</span><span class="dv">4</span>, <span class="co"># assign numbers</span></span>
@@ -235,23 +228,23 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb7-19"><a href="#cb7-19" aria-hidden="true" tabindex="-1"></a>    <span class="at">title =</span> <span class="st">"Table of Models for Nest Box Occupancy"</span> <span class="co"># add title in header</span></span>
 <span id="cb7-20"><a href="#cb7-20" aria-hidden="true" tabindex="-1"></a>  )</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
-<div id="yclgpyghpm" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
-<style>#yclgpyghpm table {
+<div id="glnypmgpto" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<style>#glnypmgpto table {
   font-family: system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
-#yclgpyghpm thead, #yclgpyghpm tbody, #yclgpyghpm tfoot, #yclgpyghpm tr, #yclgpyghpm td, #yclgpyghpm th {
+#glnypmgpto thead, #glnypmgpto tbody, #glnypmgpto tfoot, #glnypmgpto tr, #glnypmgpto td, #glnypmgpto th {
   border-style: none;
 }
 
-#yclgpyghpm p {
+#glnypmgpto p {
   margin: 0;
   padding: 0;
 }
 
-#yclgpyghpm .gt_table {
+#glnypmgpto .gt_table {
   display: table;
   border-collapse: collapse;
   line-height: normal;
@@ -277,12 +270,12 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   border-left-color: #D3D3D3;
 }
 
-#yclgpyghpm .gt_caption {
+#glnypmgpto .gt_caption {
   padding-top: 4px;
   padding-bottom: 4px;
 }
 
-#yclgpyghpm .gt_title {
+#glnypmgpto .gt_title {
   color: #333333;
   font-size: 125%;
   font-weight: initial;
@@ -294,7 +287,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   border-bottom-width: 0;
 }
 
-#yclgpyghpm .gt_subtitle {
+#glnypmgpto .gt_subtitle {
   color: #333333;
   font-size: 85%;
   font-weight: initial;
@@ -306,7 +299,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   border-top-width: 0;
 }
 
-#yclgpyghpm .gt_heading {
+#glnypmgpto .gt_heading {
   background-color: #FFFFFF;
   text-align: center;
   border-bottom-color: #FFFFFF;
@@ -318,13 +311,13 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   border-right-color: #D3D3D3;
 }
 
-#yclgpyghpm .gt_bottom_border {
+#glnypmgpto .gt_bottom_border {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
 }
 
-#yclgpyghpm .gt_col_headings {
+#glnypmgpto .gt_col_headings {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -339,7 +332,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   border-right-color: #D3D3D3;
 }
 
-#yclgpyghpm .gt_col_heading {
+#glnypmgpto .gt_col_heading {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -359,7 +352,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   overflow-x: hidden;
 }
 
-#yclgpyghpm .gt_column_spanner_outer {
+#glnypmgpto .gt_column_spanner_outer {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -371,15 +364,15 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   padding-right: 4px;
 }
 
-#yclgpyghpm .gt_column_spanner_outer:first-child {
+#glnypmgpto .gt_column_spanner_outer:first-child {
   padding-left: 0;
 }
 
-#yclgpyghpm .gt_column_spanner_outer:last-child {
+#glnypmgpto .gt_column_spanner_outer:last-child {
   padding-right: 0;
 }
 
-#yclgpyghpm .gt_column_spanner {
+#glnypmgpto .gt_column_spanner {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
@@ -391,11 +384,11 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   width: 100%;
 }
 
-#yclgpyghpm .gt_spanner_row {
+#glnypmgpto .gt_spanner_row {
   border-bottom-style: hidden;
 }
 
-#yclgpyghpm .gt_group_heading {
+#glnypmgpto .gt_group_heading {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -421,7 +414,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   text-align: left;
 }
 
-#yclgpyghpm .gt_empty_group_heading {
+#glnypmgpto .gt_empty_group_heading {
   padding: 0.5px;
   color: #333333;
   background-color: #FFFFFF;
@@ -436,15 +429,15 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   vertical-align: middle;
 }
 
-#yclgpyghpm .gt_from_md > :first-child {
+#glnypmgpto .gt_from_md > :first-child {
   margin-top: 0;
 }
 
-#yclgpyghpm .gt_from_md > :last-child {
+#glnypmgpto .gt_from_md > :last-child {
   margin-bottom: 0;
 }
 
-#yclgpyghpm .gt_row {
+#glnypmgpto .gt_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -463,7 +456,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   overflow-x: hidden;
 }
 
-#yclgpyghpm .gt_stub {
+#glnypmgpto .gt_stub {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -476,7 +469,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   padding-right: 5px;
 }
 
-#yclgpyghpm .gt_stub_row_group {
+#glnypmgpto .gt_stub_row_group {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -490,15 +483,15 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   vertical-align: top;
 }
 
-#yclgpyghpm .gt_row_group_first td {
+#glnypmgpto .gt_row_group_first td {
   border-top-width: 2px;
 }
 
-#yclgpyghpm .gt_row_group_first th {
+#glnypmgpto .gt_row_group_first th {
   border-top-width: 2px;
 }
 
-#yclgpyghpm .gt_summary_row {
+#glnypmgpto .gt_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -508,16 +501,16 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   padding-right: 5px;
 }
 
-#yclgpyghpm .gt_first_summary_row {
+#glnypmgpto .gt_first_summary_row {
   border-top-style: solid;
   border-top-color: #D3D3D3;
 }
 
-#yclgpyghpm .gt_first_summary_row.thick {
+#glnypmgpto .gt_first_summary_row.thick {
   border-top-width: 2px;
 }
 
-#yclgpyghpm .gt_last_summary_row {
+#glnypmgpto .gt_last_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -527,7 +520,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   border-bottom-color: #D3D3D3;
 }
 
-#yclgpyghpm .gt_grand_summary_row {
+#glnypmgpto .gt_grand_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -537,7 +530,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   padding-right: 5px;
 }
 
-#yclgpyghpm .gt_first_grand_summary_row {
+#glnypmgpto .gt_first_grand_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -547,7 +540,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   border-top-color: #D3D3D3;
 }
 
-#yclgpyghpm .gt_last_grand_summary_row_top {
+#glnypmgpto .gt_last_grand_summary_row_top {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -557,11 +550,11 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   border-bottom-color: #D3D3D3;
 }
 
-#yclgpyghpm .gt_striped {
+#glnypmgpto .gt_striped {
   background-color: rgba(128, 128, 128, 0.05);
 }
 
-#yclgpyghpm .gt_table_body {
+#glnypmgpto .gt_table_body {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -570,7 +563,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   border-bottom-color: #D3D3D3;
 }
 
-#yclgpyghpm .gt_footnotes {
+#glnypmgpto .gt_footnotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -584,7 +577,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   border-right-color: #D3D3D3;
 }
 
-#yclgpyghpm .gt_footnote {
+#glnypmgpto .gt_footnote {
   margin: 0px;
   font-size: 90%;
   padding-top: 4px;
@@ -593,7 +586,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   padding-right: 5px;
 }
 
-#yclgpyghpm .gt_sourcenotes {
+#glnypmgpto .gt_sourcenotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -607,7 +600,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   border-right-color: #D3D3D3;
 }
 
-#yclgpyghpm .gt_sourcenote {
+#glnypmgpto .gt_sourcenote {
   font-size: 90%;
   padding-top: 4px;
   padding-bottom: 4px;
@@ -615,72 +608,72 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   padding-right: 5px;
 }
 
-#yclgpyghpm .gt_left {
+#glnypmgpto .gt_left {
   text-align: left;
 }
 
-#yclgpyghpm .gt_center {
+#glnypmgpto .gt_center {
   text-align: center;
 }
 
-#yclgpyghpm .gt_right {
+#glnypmgpto .gt_right {
   text-align: right;
   font-variant-numeric: tabular-nums;
 }
 
-#yclgpyghpm .gt_font_normal {
+#glnypmgpto .gt_font_normal {
   font-weight: normal;
 }
 
-#yclgpyghpm .gt_font_bold {
+#glnypmgpto .gt_font_bold {
   font-weight: bold;
 }
 
-#yclgpyghpm .gt_font_italic {
+#glnypmgpto .gt_font_italic {
   font-style: italic;
 }
 
-#yclgpyghpm .gt_super {
+#glnypmgpto .gt_super {
   font-size: 65%;
 }
 
-#yclgpyghpm .gt_footnote_marks {
+#glnypmgpto .gt_footnote_marks {
   font-size: 75%;
   vertical-align: 0.4em;
   position: initial;
 }
 
-#yclgpyghpm .gt_asterisk {
+#glnypmgpto .gt_asterisk {
   font-size: 100%;
   vertical-align: 0;
 }
 
-#yclgpyghpm .gt_indent_1 {
+#glnypmgpto .gt_indent_1 {
   text-indent: 5px;
 }
 
-#yclgpyghpm .gt_indent_2 {
+#glnypmgpto .gt_indent_2 {
   text-indent: 10px;
 }
 
-#yclgpyghpm .gt_indent_3 {
+#glnypmgpto .gt_indent_3 {
   text-indent: 15px;
 }
 
-#yclgpyghpm .gt_indent_4 {
+#glnypmgpto .gt_indent_4 {
   text-indent: 20px;
 }
 
-#yclgpyghpm .gt_indent_5 {
+#glnypmgpto .gt_indent_5 {
   text-indent: 25px;
 }
 
-#yclgpyghpm .katex-display {
+#glnypmgpto .katex-display {
   display: inline-flex !important;
   margin-bottom: 0.75em !important;
 }
 
-#yclgpyghpm div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
+#glnypmgpto div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
   height: 0px !important;
 }
 </style>
@@ -728,6 +721,21 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 </div>
 </div>
+<section id="e.-run-models" class="level2">
+<h2 class="anchored" data-anchor-id="e.-run-models">e. Run Models</h2>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>mod1 <span class="ot">&lt;-</span> <span class="fu">glm</span>(e <span class="sc">~</span> <span class="dv">1</span>, <span class="at">data =</span> nest_boxes, <span class="at">family =</span> binomial) <span class="co"># create null model</span></span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a>mod2 <span class="ot">&lt;-</span> <span class="fu">glm</span>(e <span class="sc">~</span> season, <span class="at">data =</span> nest_boxes, <span class="at">family =</span> binomial) </span>
+<span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a><span class="co"># create season model</span></span>
+<span id="cb8-5"><a href="#cb8-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-6"><a href="#cb8-6" aria-hidden="true" tabindex="-1"></a>mod3 <span class="ot">&lt;-</span> <span class="fu">glm</span>(e <span class="sc">~</span> edge_distance, <span class="at">data =</span> nest_boxes, <span class="at">family =</span> binomial) </span>
+<span id="cb8-7"><a href="#cb8-7" aria-hidden="true" tabindex="-1"></a><span class="co"># create edge distance model </span></span>
+<span id="cb8-8"><a href="#cb8-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-9"><a href="#cb8-9" aria-hidden="true" tabindex="-1"></a>mod4 <span class="ot">&lt;-</span> <span class="fu">glm</span>(e <span class="sc">~</span> season <span class="sc">*</span> edge_distance, <span class="at">data =</span> nest_boxes, <span class="at">family =</span> binomial)</span>
+<span id="cb8-10"><a href="#cb8-10" aria-hidden="true" tabindex="-1"></a><span class="co"># create saturated model</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
 </section>
 
 </main>
