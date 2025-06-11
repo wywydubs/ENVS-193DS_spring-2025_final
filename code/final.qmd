@@ -199,7 +199,7 @@ plot(res4)
 
 
 ## g. Select the best model
-```{r MuMin}
+```{r MuMin, message=FALSE, warning=FALSE}
 options(na.action = "na.fail") # troubleshooting line from MuMin guide
 
 # Use dredge to give every possible model from our model 4 with all variables
@@ -212,3 +212,71 @@ print(dredge_results)
 The best model as determined by Akaike’s Information Criterion corrected for 
 small sample size (AICc) was the model that measured the occupancy based on
 the relationship between edge distance and season. 
+
+
+
+## h. Visualize model predictions
+
+```{r model predict, message=FALSE, warning=FALSE}
+prediction_range <- expand.grid(
+  edge_distance = seq(min(nest_boxes$edge_distance), 
+                  max(nest_boxes$edge_distance), length.out = 100),
+  season = unique(nest_boxes$season)
+)
+# add in 100 predictions, 
+
+get_preds <- function(model, model_label) {
+  preds <- predict(model, newdata = prediction_range, 
+                   type = "response", se.fit = TRUE)
+  prediction_range %>%
+    mutate(
+      fit = preds$fit,
+      lower = fit - 1.96 * preds$se.fit,
+      upper = fit + 1.96 * preds$se.fit,
+      model = model_label
+    )
+}
+# write out function to make predictions 
+
+pred1 <- get_preds(mod1, "Model 1: Null") #apply predictions for the models
+pred2 <- get_preds(mod2, "Model 2: Season Only")
+pred3 <- get_preds(mod3, "Model 3: Distance Only")
+pred4 <- get_preds(mod4, "Model 4: Both")
+
+all_predictions <- bind_rows(pred1, pred2, pred3, pred4) 
+# combine for one data frame
+
+ggplot(all_predictions, 
+       aes(x = edge_distance, y = fit, color = season, fill = season)) +
+  geom_line(size = 1) +
+  geom_ribbon(aes(ymin = lower, ymax = upper, fill = season, group = season), 
+              alpha = 0.2, color = NA) +
+  facet_wrap(~model) +
+  # add in prediction graph
+  labs(
+    x = "Distance to Forest Edge (meters)",
+    y = "Predicted Probability of Nest Box Being Unoccupied"
+  )+
+  theme_minimal() +
+  theme(
+    panel.grid = element_blank(),
+    legend.title = element_blank() 
+  ) # add in all  visual changes
+```
+
+Predicted probabilities of nest boxes being unoccupied are shown across a 
+gradient of distance from the forest edge, with two survey years of 2016 and 
+2019.Each panel is one of four fitted models: a null model with no predictors, a 
+season-only model, a distance-only model, and a full model including both season 
+and distance to edge. Grey ribbons are 95% 
+confidence intervals.
+
+Data source: Stojanovic, Dejan et al. (2021). Do nest boxes breed the target 
+species or its competitors? A case study of a critically endangered bird 
+[Dataset]. Dryad. https://doi.org/10.5061/dryad.83bk3j9sb
+
+
+
+** note ** this section I used mostly AI suggestions to write code as I was very
+lost and could not find anything online to start my predictions. GGplot sections
+were completed without.
